@@ -1,0 +1,59 @@
+'scopeName': 'source.gift'
+'name': 'Moodle Gift'
+'fileTypes': ['gift', 'Gift']
+
+'patterns': [
+
+# // text 	Comment until end of line
+  {
+    'match': '^//.*'
+    'name': 'comment.line.gift'
+  },
+  # ::title:: 	Question title
+  {
+    'match': '::.*::'
+    'name': 'entity.name.gift'
+  },
+
+# { 	Start answer(s) -- without any answers, text is a description of following questions
+  {
+      'begin': '(?<!\\\\){'
+      'beginCaptures':
+          '0':
+              'name': 'punctuation.definition.string.begin.gift'
+      'end': '(?<!\\\\)}'
+      'endCaptures':
+          '0':
+              'name': 'punctuation.definition.string.end.gift'
+      'name': 'string.quoted.single.gift'
+      'patterns': [
+          {
+              'name': 'constant.character.escape.gift'
+          },
+          {
+            'match': '(?<![\\{])#.*$'
+            'name': 'markup.italic.gift'
+          },
+          {
+            'match': '(?<![\\{])->'
+            'name': 'constant.character.gift'
+          },
+          {
+            'match': '(?<!\\\\)[=~](%[0-9]+%)?'
+            'captures':
+              '1':
+                'name': 'constant.numeric.gift'
+            'name': 'constant.character.gift'
+          },
+      ]
+  },
+  {
+    'match': '\\[\\w*\\]'
+    'name': 'constant.language.gift'
+  },
+# {T} or {F} 	True or False answer; also {TRUE} and {FALSE}
+  {
+    'match': '{(T|F|TRUE|FALSE)}'
+    'name': 'constant.language.gift'
+  },
+]
