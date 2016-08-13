@@ -12,7 +12,7 @@
   # ::title:: 	Question title
   {
     'match': '::.*::'
-    'name': 'entity.name.gift'
+    'name': 'markup.heading.gift'
   },
 
 # { 	Start answer(s) -- without any answers, text is a description of following questions
@@ -20,26 +20,33 @@
       'begin': '(?<!\\\\){'
       'beginCaptures':
           '0':
-              'name': 'punctuation.definition.string.begin.gift'
+              'name': 'constant.character.gift'
       'end': '(?<!\\\\)}'
       'endCaptures':
           '0':
-              'name': 'punctuation.definition.string.end.gift'
+              'name': 'constant.character.gift'
       'name': 'string.quoted.single.gift'
       'patterns': [
           {
-              'name': 'constant.character.escape.gift'
+            'match': '^//.*'
+            'name': 'comment.line.gift'
           },
           {
-            'match': '(?<![\\{])#.*$'
-            'name': 'markup.italic.gift'
+            'match': '\\\\.'
+            'name': 'constant.character.escape.cs'
+          },
+          #response starting with #. Possible multi line
+          {
+#            'match': '#.*$'
+            'match': '(?<![\\{])#.*(?=[=~}])'
+            'name': 'comment.line.gift'
           },
           {
-            'match': '(?<![\\{])->'
+            'match': '(?<![\\\\])->'
             'name': 'constant.character.gift'
           },
           {
-            'match': '(?<!\\\\)[=~](%[0-9]+%)?'
+            'match': '(?<!\\\\)[=~](%-?[0-9]+%)?'
             'captures':
               '1':
                 'name': 'constant.numeric.gift'
