@@ -37,9 +37,9 @@
           },
           #response starting with #. Possible multi line
           {
-#            'match': '#.*$'
-            'match': '(?<![\\{])#.*(?=[=~}])'
-            'name': 'comment.line.gift'
+            'begin': '(?<![\\{])(?<=#)'
+            'end': '(?!\\\\)(?=[=~}])'
+            'name': 'storage.type.gift'
           },
           {
             'match': '(?<![\\\\])->'
