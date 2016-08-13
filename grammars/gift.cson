@@ -38,7 +38,7 @@
           #response starting with #. Possible multi line
           {
             'begin': '(?<![\\{])(?<=#)'
-            'end': '(?!\\\\)(?=[=~}])'
+            'end': '.?(?![\\\\])(?=[=~}])'
             'name': 'storage.type.gift'
           },
           {
